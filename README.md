@@ -1,4 +1,4 @@
-### Домашнее задание к занятию «2.1 Express»
+### Домашнее задание к занятию «2.2 Middleware»
 ***
 ##### Book object format:
 * id: string
@@ -8,6 +8,7 @@
 * favorite: string
 * fileCover: string
 * fileName: string
+* fileBook: string
 
 ***
 
@@ -15,7 +16,9 @@
 * POST: /api/user/login - authorisation
 * GET: /api/books - get all books
 * GET: /api/books/:id - get book with id
+* GET: /api/books/:id/download - get book file by id
 * POST: /api/books - create book
+* POST: /api/books/:id/upload - upload book file
 * PUT: /api/books/:id - edit book information
 * DELETE: /api/books/:id - delete book with id
 
