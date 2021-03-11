@@ -22,28 +22,63 @@ const store = {
 
 const getBookById = id => store.books.findIndex(book => book.id === id);
 
-router.post('/', (req, res) => {
+router.post('/', fileMiddleware.single('book'), (req, res) => {
     const { books } = store;
     const {
-        title,
-        description,
-        authors,
-        favorite,
-        fileCover,
-        fileName,
-    } = req.body;
-
+        file: {
+            originalname,
+            path,
+        } = {},
+        body: {
+            title,
+            description,
+            authors,
+            favorite,
+            fileCover,
+            fileName,
+        }
+    } = req;
     const newBook = new Book(
         title,
         description,
         authors,
         favorite,
         fileCover,
-        fileName,
+        fileName ? fileName : originalname,
+        path
     );
     books.push(newBook);
 
     res.status(201).json(newBook);
+});
+
+router.put('/:id', fileMiddleware.single('book'), (req, res) => {
+    const { books } = store;
+    const {
+        params: {
+            id
+        },
+        body,
+    } = req;
+    const findId = getBookById(id);
+    if (findId !== -1) {
+        books[findId] = {
+            ...books[findId],
+            ...body,
+        };
+        if (req.file) {
+            const { file: { originalname, path } } = req;
+            books[findId] = {
+                ...books[findId],
+                ...body,
+                fileName: body.fileName ? body.fileName : originalname,
+                fileBook: path
+            };
+        }
+        res.json(books[findId]);
+    } else {
+        res.status(404).json(`Book with index ${id} not found`);
+    }
 });
 
 router.get('/', (req, res) => {
@@ -68,21 +103,6 @@ router.get('/:id', (req, res) => {
     }
 });
 
-router.put('/:id', (req, res) => {
-    const { books } = store;
-    const { id } = req.params;
-    const findId = getBookById(id);
-    if (findId !== -1) {
-        books[findId] = {
-            ...books[findId],
-            ...req.body,
-        };
-        res.json(books[findId]);
-    } else {
-        res.status(404).json(`Book with index ${id} not found`);
-    }
-});
-
 router.delete('/:id', (req, res) => {
     const { books } = store;
     const { id } = req.params;
@@ -94,29 +114,6 @@ router.delete('/:id', (req, res) => {
     } else {
         res.status(404).json(`Book with index ${id} not found`);
     }
-});
-
-router.post('/:id/upload', fileMiddleware.single('book'), (req, res) => {
-    const { params: { id } } = req;
-    const findId = getBookById(id);
-    if (findId !== -1) {
-        if (req.file) {
-            const { books } = store;
-            const { file: { originalname, path } } = req;
-            console.log(path);
-            books[findId] = {
-                ...books[findId],
-                fileName: originalname,
-                fileBook: path
-            };
-            res.json(books[findId]);
-        } else {
-            res.json(null);
-        }
-    } else {
-        res.status(404).json(`Book with index ${id} not found`);
-    }
-
 });
 
 router.get('/:id/download', (req, res) => {

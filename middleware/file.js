@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
         cb(null, 'public/books');
     },
     filename(req, file, cb) {
-        cb(null, file.originalname);
+        cb(null, `${new Date().getTime()}-${file.originalname}`);
     }
 });
 

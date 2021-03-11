@@ -18,7 +18,6 @@
 * GET: /api/books/:id - get book with id
 * GET: /api/books/:id/download - get book file by id
 * POST: /api/books - create book
-* POST: /api/books/:id/upload - upload book file
 * PUT: /api/books/:id - edit book information
 * DELETE: /api/books/:id - delete book with id
 
