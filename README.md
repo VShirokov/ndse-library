@@ -16,9 +16,13 @@
 * /books/ - просмотр списка всех книг (вывод заголовков);
 * /books/view/:id - информация по конкретной книге;
 * /books/create - создание книги;
-* /books/update/id - редактирование книги.
+* /books/update/:id - редактирование книги.
 
 ***
 
 #### npm run start - start server
 #### npm run dev - start server with nodemon
+
+***
+
+My page on heroku https://vshirokov-express-node-ejs.herokuapp.com/
