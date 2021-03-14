@@ -1,0 +1,112 @@
+<form method="POST" enctype="multipart/form-data">
+    <div class="field is-vertical is-align-items-center">
+        <label for="inputTitle" class="field-label is-size-4">
+            <strong>Title</strong>
+        </label>
+        <input type="text"
+               value="<%= book.title %>"
+               placeholder="Book title"
+               name="title"
+               class="control input is-primary is-medium"
+               id="inputTitle">
+    </div>
+
+    <div class="field is-vertical">
+        <label for="inputDescription" class="field-label is-size-4">
+            <strong>Description</strong>
+        </label>
+        <textarea
+                rows="5"
+                name="description"
+                class="control textarea is-primary"
+                placeholder="Book description"
+                id="inputDescription"
+        ><%= book.description %></textarea>
+    </div>
+
+    <div class="field is-vertical is-align-items-center">
+        <label for="inputAuthors" class="field-label is-size-4">
+            <strong>Authors</strong>
+        </label>
+        <input type="text"
+               value="<%= book.authors %>"
+               placeholder="Book authors"
+               name="authors"
+               class="control input is-primary is-medium"
+               id="inputAuthors">
+    </div>
+
+    <div class="field is-vertical is-align-items-center">
+        <label for="inputFavorite" class="field-label is-size-4">
+            <strong>Favorite</strong>
+        </label>
+        <input type="text"
+               value="<%= book.favorite %>"
+               placeholder="Book favorite"
+               name="favorite"
+               class="control input is-primary is-medium"
+               id="inputFavorite">
+    </div>
+
+    <div class="field is-vertical is-align-items-center">
+        <label for="inputFileCover" class="field-label is-size-4">
+            <strong>File cover</strong>
+        </label>
+        <input type="text"
+               value="<%= book.fileCover %>"
+               placeholder="Book file cover"
+               name="fileCover"
+               class="control input is-primary is-medium"
+               id="inputFileCover">
+    </div>
+
+    <div class="field is-vertical is-align-items-center">
+        <label for="inputFileName" class="field-label is-size-4">
+            <strong>File name</strong>
+        </label>
+        <input type="text"
+               value="<%= book.fileName %>"
+               placeholder="Book file name"
+               name="fileName"
+               class="control input is-primary is-medium"
+               id="inputFileName">
+    </div>
+
+    <div id="uploadBookInput" class="file is-large is-boxed has-name">
+        <label class="file-label">
+            <input class="file-input" type="file" name="fileBook">
+            <span class="file-cta">
+                <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                    Select a file...
+                </span>
+            </span>
+            <span class="file-name">
+                No file uploaded
+            </span>
+        </label>
+    </div>
+
+    <div class="field mt-5">
+        <div style="max-width: 300px" class="control">
+            <button type="submit" class="button is-link is-medium is-fullwidth">
+                <i class="fas fa-check mr-2"></i>
+                Save and continue
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+    const fileInput = document.querySelector('#uploadBookInput input[type=file]');
+    if (fileInput) {
+        fileInput.onchange = () => {
+            if (fileInput.files.length > 0) {
+                const fileName = document.querySelector('#uploadBookInput .file-name');
+                fileName.textContent = fileInput.files[0].name;
+            }
+        }
+    }
+</script>

@@ -1,0 +1,110 @@
+<%- include("../common/layoutStart", {title: title}) %>
+<section class="section">
+    <div class="container">
+        <div class="buttons">
+            <a href="/books" class="button is-info">
+                <i class="fas fa-reply mr-2"></i>
+                All books
+            </a>
+            <a href="/books/update/<%= book.id %>" class="button is-warning">
+                <i class="far fa-edit mr-2"></i>
+                Update book</a>
+            <form action="/books/delete/<%= book.id %>" method="POST">
+                <button class="button is-danger">
+                    <i class="far fa-trash-alt mr-2"></i>
+                    Delete book
+                </button>
+            </form>
+        </div>
+        <form>
+            <div class="field is-vertical is-align-items-center">
+                <label for="inputTitle" class="field-label is-size-4">
+                    <strong>Title</strong>
+                </label>
+                <input
+                    type="text"
+                    value="<%= book.title %>"
+                    name="title"
+                    class="control input is-primary is-medium"
+                    id="inputTitle"
+                    readonly>
+            </div>
+
+            <div class="field is-vertical">
+                <label for="inputDescription" class="field-label is-size-4">
+                    <strong>Description</strong>
+                </label>
+                <textarea
+                    rows="5"
+                    name="description"
+                    class="control textarea is-primary"
+                    id="inputDescription"
+                    readonly
+                ><%= book.description %>
+                </textarea>
+            </div>
+
+            <div class="field is-vertical is-align-items-center">
+                <label for="inputAuthors" class="field-label is-size-4">
+                    <strong>Authors</strong>
+                </label>
+                <input
+                    type="text"
+                    value="<%= book.authors %>"
+                    name="authors"
+                    class="control input is-primary is-medium"
+                    id="inputAuthors"
+                    readonly>
+            </div>
+
+            <div class="field is-vertical is-align-items-center">
+                <label for="inputFavorite" class="field-label is-size-4">
+                    <strong>Favorite</strong>
+                </label>
+                <input
+                    type="text"
+                    value="<%= book.favorite %>"
+                    name="favorite"
+                    class="control input is-primary is-medium"
+                    id="inputFavorite"
+                    readonly>
+            </div>
+
+            <div class="field is-vertical is-align-items-center">
+                <label for="inputFileCover" class="field-label is-size-4">
+                    <strong>File cover</strong>
+                </label>
+                <input
+                    type="text"
+                    value="<%= book.fileCover %>"
+                    name="fileCover"
+                    class="control input is-primary is-medium"
+                    id="inputFileCover"
+                    readonly>
+            </div>
+
+            <div class="field is-vertical is-align-items-center">
+                <label for="inputFileName" class="field-label is-size-4">
+                    <strong>File name</strong>
+                </label>
+                <input
+                    type="text"
+                    value="<%= book.fileName %>"
+                    name="fileName"
+                    class="control input is-primary is-medium"
+                    id="inputFileName"
+                    readonly>
+            </div>
+
+            <% if(book.fileBook) { %>
+                <div class="buttons mt-6">
+                    <a href="/books/download/<%= book.id %>" class="button is-success is-large">
+                        <i class="far fa-save mr-2"></i>
+                        Download book
+                    </a>
+                </div>
+            <% } %>
+        </form>
+    </div>
+</section>
+<%- include("../common/layoutEnd") %>

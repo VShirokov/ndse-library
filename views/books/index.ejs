@@ -1,0 +1,41 @@
+<%- include("../common/layoutStart", {title: title}) %>
+<section class="section">
+    <div class="container">
+        <div class="buttons">
+            <a href="/books/create" class="button is-success">
+                <i class="far fa-plus-square mr-2"></i>
+                Add new book
+            </a>
+        </div>
+        <% if(books.length) { %>
+            <ul class="block content">
+                <% books.map((book, index) => { %>
+                    <li class="box is-flex is-flex-wrap-wrap is-justify-content-space-between">
+                        <a class="field is-vertical" href="/books/view/<%= book.id %>">
+                            <strong><%= index + 1 %> - <%= book.title %></strong>
+                        </a>
+                        <div class="buttons is-flex is-flex-wrap-wrap">
+                            <a href="/books/view/<%= book.id %>" class="button is-info">
+                                <i class="fas fa-eye mr-2"></i>
+                                Detail page
+                            </a>
+                            <a href="/books/update/<%= book.id %>" class="button is-warning">
+                                <i class="far fa-edit mr-2"></i>
+                                Update book
+                            </a>
+                            <form action="/books/delete/<%= book.id %>" method="POST">
+                                <button class="button is-danger">
+                                    <i class="far fa-trash-alt mr-2"></i>
+                                    Delete book
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
+        <% }else { %>
+            <h1 class="title">There are no books yet</h1>
+        <% } %>
+    </div>
+</section>
+<%- include("../common/layoutEnd")%>

@@ -1,0 +1,13 @@
+<%- include("../common/layoutStart", {title: title}) %>
+<section class="section">
+    <div class="container">
+        <div class="buttons">
+            <a href="/books/view/<%= book.id %>" class="button is-info">
+                <i class="fas fa-reply mr-2"></i>
+                Cancel
+            </a>
+        </div>
+        <%- include("../common/form") %>
+    </div>
+</section>
+<%- include("../common/layoutEnd") %>
