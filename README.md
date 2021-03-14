@@ -1,4 +1,4 @@
-### Домашнее задание к занятию «2.2 Middleware»
+### Домашнее задание к занятию «2.3 EJS»
 ***
 ##### Book object format:
 * id: string
@@ -12,14 +12,11 @@
 
 ***
 
-##### Routes:
-* POST: /api/user/login - authorisation
-* GET: /api/books - get all books
-* GET: /api/books/:id - get book with id
-* GET: /api/books/:id/download - get book file by id
-* POST: /api/books - create book
-* PUT: /api/books/:id - edit book information
-* DELETE: /api/books/:id - delete book with id
+##### Pages:
+* /books/ - просмотр списка всех книг (вывод заголовков);
+* /books/view/:id - информация по конкретной книге;
+* /books/create - создание книги;
+* /books/update/id - редактирование книги.
 
 ***
 
