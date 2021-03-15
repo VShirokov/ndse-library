@@ -23,7 +23,7 @@ app.use('/books', bookRouter);
 
 app.use(errorMiddleware);
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
