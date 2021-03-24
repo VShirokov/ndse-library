@@ -3,6 +3,8 @@ const router = express.Router();
 const path = require('path');
 const { Book } = require('../models');
 const fileMiddleware = require('../middleware/file');
+const requestToCounterMiddleware = require('../middleware/requestToCounter');
+const helpers = require('../helpers/utils');
 
 /**
  * Book object format:
@@ -80,13 +82,16 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/view/:id', (req, res) => {
+router.get('/view/:id', requestToCounterMiddleware, async (req, res) => {
     const { books } = store;
     const { id } = req.params;
     const findId = getBookById(id);
     if (findId !== -1) {
+        const count = await helpers.getCount(id);
+        console.log('count -> ', count);
         res.render("books/view", {
             title: `Detail book page - ${books[findId].title}`,
+            count: count,
             book: books[findId],
         });
     } else {
